@@ -188,7 +188,10 @@ def pfunc_vienna_(seq, T=37, version='2', constraint=None, motif=None, param_fil
     os.remove(fname)
 
     if version.startswith('2'):
-        os.remove("%s_0001_ss.ps" % output_id)
+        if os.path.exists('{}_0001_ss.ps'.format(output_id)):
+            os.remove("%s_0001_ss.ps" % output_id)
+        else:
+            print('Warning! {} does not exists!'.format(output_id))
 
     if 'omitting constraint' in stderr.decode('utf-8'):
         free_energy = np.inf # Impossible structure
