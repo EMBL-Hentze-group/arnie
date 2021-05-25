@@ -460,12 +460,13 @@ def write_reactivity_file(reactivities, fname=None):
 
 def local_rand_filename(n=6):
   """generate random filename
-
+  changed this function so that this temp file is also created in 'TMP' folder
   Args:
     n (int): number of characters
   """
+  tmpdir = load_package_locations()['TMP']
   rand = ''.join([random.choice(string.ascii_lowercase) for _ in range(n)])
-  return rand
+  return os.path.join(tmpdir,rand)
 
 def filename(n=6):
   """generate random filename
